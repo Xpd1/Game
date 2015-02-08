@@ -50,8 +50,7 @@ def GameLoop():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
-                    gameExist = True
-                    gameOver = False
+                    gameExit = True
                 if event.key == pygame.K_c:
                     GameLoop()
 
@@ -61,6 +60,7 @@ def GameLoop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                  gameExit = True
+                 gameQuit = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     movement = -block
@@ -76,9 +76,7 @@ def GameLoop():
                     prime_x = 10
                 if prime_x >= 800:
                     prime_x = 790
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
+
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT or pygame.K_LEFT:
@@ -108,5 +106,8 @@ def GameLoop():
         pygame.display.update()
         clock.tick(fps)
 
+
 Intro()
 GameLoop()
+pygame.quit()
+sys.exit()
