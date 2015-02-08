@@ -1,6 +1,7 @@
-__author__ = 'Unknown'
+__author__ = 'Xpd'
 import pygame
 import random
+import sys
 pygame.init()
 white = (255,255,255)
 black = (0,0,0)
@@ -14,7 +15,18 @@ clock = pygame.time.Clock()
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Invaders')
-
+def Intro():
+    Intro = True
+    while Intro == True:
+        gameDisplay.fill(green)
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    Intro = False
+            if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
 
 def GameLoop():
     gameExit = False
@@ -24,7 +36,7 @@ def GameLoop():
     fps=300
     alien_x = random.randrange(50,300)
     alien_y = random.randrange(50,300)
-    alien_health = 3
+    alien_health = 1
     ship_health = 3
     ship_damage = 1
     bulletspeed = 0
@@ -32,6 +44,8 @@ def GameLoop():
     bullet_x = -50
     bullet_size = 5
     movement = 0
+
+
     while gameOver == True:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -62,7 +76,9 @@ def GameLoop():
                     prime_x = 10
                 if prime_x >= 800:
                     prime_x = 790
-
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT or pygame.K_LEFT:
@@ -80,7 +96,7 @@ def GameLoop():
                     if alien_health <= 0:
                         alien_x = random.randrange(50,300)
                         alien_y = random.randrange(50,300)
-                        alien_health = 3
+                        alien_health = 1
 
 
         prime_x += movement
@@ -91,8 +107,6 @@ def GameLoop():
         pygame.draw.rect(gameDisplay, red, [bullet_x, bullet_y,bullet_size, bullet_size])
         pygame.display.update()
         clock.tick(fps)
-    for event in pygame.event.get():
-        if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
+
+Intro()
 GameLoop()
