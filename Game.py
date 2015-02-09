@@ -27,6 +27,19 @@ def Intro():
             if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+def text_to_button(msg, color, buttonx, buttony, buttonwidth, buttonheight, size = "small"):
+    textSurf, textRect = text_objects(msg,color,size)
+    textRect.center = ((buttonx+(buttonwidth/2)), buttony+(buttonheight/2))
+    gameDisplay.blit(textSurf, textRect)
+
+    return textSurface, textSurface.get_rect()
+
+
+
+def text(msg,color, y_displace=0, size = "small"):
+    textSurf, textRect = text_objects(msg,color, size)
+    textRect.center = (display_width / 2), (display_height / 2)+y_displace
+    gameDisplay.blit(textSurf, textRect)
 
 def GameLoop():
     gameExit = False
@@ -58,6 +71,7 @@ def GameLoop():
     while not gameExit:
 
         for event in pygame.event.get():
+            print(event)
             if event.type == pygame.QUIT:
                  gameExit = True
                  gameQuit = True
