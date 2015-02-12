@@ -69,7 +69,10 @@ def GameLoop():
 
 
     while not gameExit:
-
+        if prime_x <= 0:
+                    prime_x = 0
+        if prime_x >= 790:
+                    prime_x = 790
         for event in pygame.event.get():
             print(event)
             if event.type == pygame.QUIT:
@@ -80,25 +83,20 @@ def GameLoop():
                     movement = -block
                 if event.key == pygame.K_RIGHT:
                     movement = block
-
                 if event.key == pygame.K_SPACE:
-                    bulletspeed = -bullet_size
-                    bullet_x = prime_x
-                    if bullet_y < 0:
-                        bullet_y = 550
-                if prime_x <= 0:
-                    prime_x = 10
-                if prime_x >= 800:
-                    prime_x = 790
+
+                        bulletspeed = -bullet_size
+                        bullet_x = prime_x
+                        if bullet_y < 0:
+                            bullet_y = 550
+
+
 
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT or pygame.K_LEFT:
                     movement = 0
-                if prime_x <= 0:
-                    prime_x = 10
-                if prime_x >= 800:
-                    prime_x = 790
+
         if alien_x < bullet_x < alien_x + 20 or alien_x < bullet_size + bullet_x < alien_x + 20:
                 if alien_y < bullet_y < alien_y + 20 or alien_y < bullet_size + bullet_y < alien_y + 20:
                     alien_health -= ship_damage
