@@ -24,7 +24,6 @@ gameDisplay = pygame.display.set_mode((display_width,display_height), 0, 0)
 pygame.display.set_caption('Invaders')
 def Intro():
     Intro = True
-    while Intro == True:
     while Intro is True:
         gameDisplay.fill(green)
         pygame.display.update()
