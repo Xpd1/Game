@@ -1,4 +1,7 @@
 __author__ = 'Xpd'
+back = "C:/Users/Unknown/PycharmProjects/untitled5/bg.png"
+sh = "C:/Users/Unknown/PycharmProjects/untitled5/ship.png"
+ali = "C:/Users/Unknown/PycharmProjects/untitled5/alien.png"
 import pygame
 import random
 import sys
@@ -11,9 +14,13 @@ blue = (0,0,255)
 display_width = 800
 display_height = 600
 
+
+background = pygame.image.load(back)
+ship = pygame.image.load(sh)
+alien = pygame.image.load(ali)
 clock = pygame.time.Clock()
 
-gameDisplay = pygame.display.set_mode((display_width,display_height))
+gameDisplay = pygame.display.set_mode((display_width,display_height), 0, 0)
 pygame.display.set_caption('Invaders')
 def Intro():
     Intro = True
@@ -45,13 +52,15 @@ def GameLoop():
     gameExit = False
     gameOver = False
     prime_x = display_width/2
-    block = 1
+    block = 3
     fps=300
     alien_x = random.randrange(50,300)
     alien_y = random.randrange(50,300)
     alien_health = 1
     ship_health = 3
     ship_damage = 1
+
+
     bulletspeed = 0
     bullet_y = 550
     bullet_x = -50
@@ -84,7 +93,9 @@ def GameLoop():
                 if event.key == pygame.K_RIGHT:
                     movement = block
                 if event.key == pygame.K_SPACE:
-
+                    if bullet_y < 0:
+                            bullet_y = 550
+                    if bullet_y == 550:
                         bulletspeed = -bullet_size
                         bullet_x = prime_x
                         if bullet_y < 0:
@@ -97,8 +108,8 @@ def GameLoop():
                 if event.key == pygame.K_RIGHT or pygame.K_LEFT:
                     movement = 0
 
-        if alien_x < bullet_x < alien_x + 20 or alien_x < bullet_size + bullet_x < alien_x + 20:
-                if alien_y < bullet_y < alien_y + 20 or alien_y < bullet_size + bullet_y < alien_y + 20:
+        if alien_x < bullet_x < alien_x + 50 or alien_x < bullet_size + bullet_x < alien_x + 50:
+                if alien_y < bullet_y < alien_y + 50 or alien_y < bullet_size + bullet_y < alien_y + 50:
                     alien_health -= ship_damage
                     bulletspeed = 0
                     bullet_y = 550
@@ -111,9 +122,12 @@ def GameLoop():
 
         prime_x += movement
         bullet_y += bulletspeed
-        gameDisplay.fill(black)
-        pygame.draw.rect(gameDisplay, green,[alien_x,alien_y,20 ,20 ] )
-        pygame.draw.rect(gameDisplay, white,[prime_x,550,10 ,15 ] )
+        pygame.draw.rect(gameDisplay, green,[alien_x,alien_y,50 ,50 ] )
+        gameDisplay.blit(background, (0,0))
+        gameDisplay.blit(alien, (alien_x,alien_y))
+
+        gameDisplay.blit(ship, (prime_x-22,545))
+
         pygame.draw.rect(gameDisplay, red, [bullet_x, bullet_y,bullet_size, bullet_size])
         pygame.display.update()
         clock.tick(fps)
