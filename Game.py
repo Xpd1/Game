@@ -19,7 +19,6 @@ elif pygame.image.get_extended() == 1:
     print("Working")
 
 clock = pygame.time.Clock()
-#Nigga
 gameDisplay = pygame.display.set_mode((display_width,display_height), 0, 0)
 pygame.display.set_caption('Invaders')
 def Intro():
